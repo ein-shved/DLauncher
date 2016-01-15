@@ -1,0 +1,16 @@
+Makefile
+*.o
+dlauncher
+Session.vim
+.deps/
+Makefile.in
+aclocal.m4
+ar-lib
+autom4te.cache/
+compile
+config.log
+config.status
+configure
+depcomp
+install-sh
+missing
