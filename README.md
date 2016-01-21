@@ -40,6 +40,6 @@ Just run ``dlauncher`` binary.
 
 # dlauncher
 
-I found mor others projects with the same name, but there is
+I found more others projects with the same name, but there is
 [one](https://github.com/xinhaoyuan/dlauncher)
 with the same aims. I think, I will use it if my won't be succeed.

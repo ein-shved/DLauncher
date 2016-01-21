@@ -11,5 +11,5 @@ int main ()
     XWindowFactory factory;
     Launcher l(factory);
     l.launch();
-    factory.event_loop();
+    factory.event_loop(l);
 }

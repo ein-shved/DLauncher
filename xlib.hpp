@@ -11,6 +11,7 @@
 
 namespace DLauncher {
 
+class Launcher;
 class XWindow : public DLauncher::Window {
 public:
     XWindow (::Display *display, XWindow *parent,
@@ -50,6 +51,22 @@ public:
 };
 
 class XWindowFactory : public DLauncher::WindowFactory {
+private:
+    class XKeyHandler {
+    public:
+        XKeyHandler (DLauncher::Launcher &launcher,
+                     ::Display *display,
+                     ::Window win);
+        void operator () (XKeyEvent *event);
+
+        bool control_mask(XKeyEvent *ev, KeySym &ksym);
+        bool mod_1_mask(XKeyEvent *ev, KeySym &ksym);
+        bool process(XKeyEvent *ev, KeySym &ksym);
+
+    private:
+        Launcher &m_launcher;
+        XIC m_xic;
+    };
 public:
     XWindowFactory (const char *display_name = NULL);
     ~XWindowFactory ();
@@ -58,7 +75,7 @@ public:
     virtual DLauncher::Window *create(DLauncher::Window *base);
     virtual int set_main_window(DLauncher::Window *window);
     virtual DLauncher::Window *get_root();
-    void event_loop();
+    void event_loop(Launcher &launcher);
 
 private:
     Display *m_display;

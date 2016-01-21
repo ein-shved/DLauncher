@@ -158,9 +158,10 @@ DLauncher::Window *XWindowFactory::get_root()
 {
     return new DLauncher::XRootWindow(m_display);
 }
-void XWindowFactory::event_loop()
+void XWindowFactory::event_loop(Launcher &launcher)
 {
     XEvent e;
+    XKeyHandler key_handler(launcher, m_display, m_main->window());
     int s = DefaultScreen(m_display);
 
     while (1) {
@@ -169,6 +170,7 @@ void XWindowFactory::event_loop()
         }
         if (e.type == KeyPress) {
             cout << "KEY!\n";
+            key_handler(&e.xkey);
             break;
         }
     }

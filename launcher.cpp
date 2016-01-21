@@ -36,12 +36,6 @@ Launcher::~Launcher()
     delete m_main;
 }
 
-void Launcher::key(const struct libinput_event_keyboard &event)
-{
-    if (!m_main->visible()) {
-        return;
-    }
-}
 void Launcher::focus(Window *window, bool loose)
 {
     if (window->same(m_main)) {
@@ -55,8 +49,13 @@ void Launcher::launch()
     m_main->draw(calc_main_space());
     m_main->draw();
 }
-void Launcher::exec(std::iterator<input_iterator_tag, std::string> cmd)
+void Launcher::exec(const std::string &cmd)
 {
+    /* TODO */
+}
+void Launcher::exec()
+{
+    exec(m_text);
 }
 Rectangle Launcher::calc_main_space()
 {
@@ -75,6 +74,21 @@ Rectangle Launcher::calc_main_space()
 
     return r;
 }
+
+const std::string &Launcher::input() const
+{
+    return m_text;
+}
+
+void Launcher::input (const std::string &string)
+{
+    m_text = string;
+}
+void Launcher::complete ()
+{
+    /* TODO */
+}
+
 const std::string &Launcher::config (const std::string &param)
 {
     if (m_config.find(param) == m_config.end()) {
